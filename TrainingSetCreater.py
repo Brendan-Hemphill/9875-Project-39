@@ -1,73 +1,52 @@
 import pandas as pd
-import kagglehub
-from kagglehub import KaggleDatasetAdapter
-
-data = list()
-
-training = list()
-
-test = list()
-
-order = [0,1,2,3,4]
+import random
 
 sets = [
-	r'mahatiratusher/heart-disease-risk-prediction-dataset',
-	r'sampadab17/network-intrusion-detection',
-	r'uciml/red-wine-quality-cortez-et-al-2009', 
- 	r'sanskar457/fraud-transaction-detection',
-  	]
-
+    r'C:\Users\Brh22\Desktop\9785\Datasets\heart_disease_risk_dataset_earlymed.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Network_Intrusion_Detection_Final_Transactions.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\winequality-red.csv'
+]
 
 finalSets = [
-	r'HeartDiseaseRiskTraining.csv',
-	r'HeartDiseaseRiskTest.csv',
-	r'NetworkIntrusionTraining.csv',
-	r'NetworkIntrusionTest.csv',
-	r'WineQualityTraining.csv',
-	r'WineQualityTest.csv'
-	r'FraudTransactionTraining.csv',
-	r'FraudTransactionTest.csv'
-	]
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\HeartDiseaseRiskTraining.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\HeartDiseaseRiskTest.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\NetworkIntrusionTraining.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\NetworkIntrusionTest.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\WineQualityTraining.csv',
+    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\WineQualityTest.csv'
+]
 
 print('''
-	1. Heart Risk
-	2. Network Intrusion
-	3. Red Wine Quality
-	4. Fraud Transactions
-	''')
+    1. Heart Risk
+    2. Network Intrusion
+    3. Red Wine Quality
+    ''')
 
-
-choice = int(input())-1
+choice = int(input()) - 1
 
 chosenSet = sets[choice]
 
-if choice == 0:  
+
+if choice == 0:
     trainingSave = finalSets[0]
     testSave = finalSets[1]
-elif choice == 1:  
-    trainingSave =  finalSets[2]
-    testSave =  finalSets[3]
-else:  
-    trainingSave =  finalSets[4]
-    testSave =  finalSets[5]
+elif choice == 1:
+    trainingSave = finalSets[2]
+    testSave = finalSets[3]
+else:
+    trainingSave = finalSets[4]
+    testSave = finalSets[5]
 
-data = kagglehub.load_dataset(
-  KaggleDatasetAdapter.PANDAS,
-  chosenSet,
-  file_path,
-)
+df = pd.read_csv(chosenSet)
+
+df = df.sample(frac=1, random_state=42).reset_index(drop=True)
 
 
+split_index = int(0.8 * len(df))
+train_df = df[:split_index]
+test_df = df[split_index:]
 
-# Shuffle the data
-data = data.sample(frac=1).reset_index(drop=True)
+test_df = test_df.drop(test_df.columns[len(test_df.columns)-1], axis=1)
 
-
-# Split the data (80% for training, 20% for testing)
-split_index = int(0.8 * len(data))
-train_data = data[:split_index]
-test_data = data[split_index:]
-
-# Save the data to CSV files
-train_data.to_csv(trainingSave, index=False)
-test_data.to_csv(testSave, index=False)
+train_df.to_csv(trainingSave, index=False)
+test_df.to_csv(testSave, index=False)
