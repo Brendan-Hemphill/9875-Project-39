@@ -1,24 +1,30 @@
 import pandas as pd
+import kagglehub
+from kagglehub import KaggleDatasetAdapter
 
 sets = [
-	r'C:\Users\Brh22\Desktop\9785\Datasets\heart_disease_risk_dataset_earlymed.csv',
-	r'C:\Users\Brh22\Desktop\9785\Datasets\Network_Intrusion_Detection_Final_Transactions.csv',
-	r'C:\Users\Brh22\Desktop\9785\Datasets\winequality-red.csv', 
- 	r'C:\Users\Brh22\Desktop\9785\Datasets\Transaction_Test_data.csv',
-  	r'C:\Users\Brh22\Desktop\9785\Datasets\Transaction_Train_data.csv'
+	r'mahatiratusher/heart-disease-risk-prediction-dataset',
+	r'sampadab17/network-intrusion-detection',
+	r'uciml/red-wine-quality-cortez-et-al-2009', 
+ 	r'sanskar457/fraud-transaction-detection',
   	]
+
+file_path = ""
 
 print('''
 	1. Heart Risk
 	2. Network Intrusion
 	3. Red Wine Quality
-	4. Transaction Test
-	5. Transaction Train
+	4. Transaction
 	''')
 
 chosenSet = sets[int(input())-1]
 
-df = pd.read_csv(chosenSet)
+df = kagglehub.load_dataset(
+  KaggleDatasetAdapter.PANDAS,
+  chosenSet,
+  file_path,
+)
 
 print(df.head())
 print(df.info())
