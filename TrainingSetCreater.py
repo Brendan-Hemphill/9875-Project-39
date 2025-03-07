@@ -2,18 +2,18 @@ import pandas as pd
 import random
 
 sets = [
-    r'C:\Users\Brh22\Desktop\9785\Datasets\heart_disease_risk_dataset_earlymed.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Network_Intrusion_Detection_Final_Transactions.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\winequality-red.csv'
+    r'heart_disease_risk_dataset_earlymed.csv',
+    r'Network_Intrusion_Detection_Final_Transactions.csv',
+    r'winequality-red.csv'
 ]
 
 finalSets = [
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\HeartDiseaseRiskTraining.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\HeartDiseaseRiskTest.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\NetworkIntrusionTraining.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\NetworkIntrusionTest.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\WineQualityTraining.csv',
-    r'C:\Users\Brh22\Desktop\9785\Datasets\Data\WineQualityTest.csv'
+    r'HeartDiseaseRiskTraining.csv',
+    r'HeartDiseaseRiskTest.csv',
+    r'NetworkIntrusionTraining.csv',
+    r'NetworkIntrusionTest.csv',
+    r'WineQualityTraining.csv',
+    r'WineQualityTest.csv'
 ]
 
 print('''
